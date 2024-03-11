@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
+
 const bcrypt = require('bcrypt');
+
 const User = require('../models/User');
 
 // Register a new user
@@ -19,10 +21,10 @@ const register = async (req, res, next) => {
 
 // Login with an existing user
 const login = async (req, res, next) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
